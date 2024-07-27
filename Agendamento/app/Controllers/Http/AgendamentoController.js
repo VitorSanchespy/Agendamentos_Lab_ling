@@ -19,9 +19,9 @@ class AgendamentoController {
       }
       async atualizar ({ params, request, response}){
         const agendamento = await Agendamento.find(params.id);
-        await agendamento.merge(request.only(['nome', 'email', 'data_hora_inicio', 'data_hora_fim'])
-        )
-        return response.status(201).json({ message: 'Agendamento deletado com sucesso' })
+        await agendamento.merge(request.only(['nome', 'email', 'data_hora_inicio', 'data_hora_fim'])) 
+        await agendamento.save();
+        return response.status(201).json({ message: 'Agendamento atualizado com sucesso' })
       }
 }
 

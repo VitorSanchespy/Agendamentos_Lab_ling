@@ -16,4 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+Route.get('agendamentos', 'AgendamentoController.index');
+Route.post('registro', 'AgendamentoController.registro');
+Route.delete('deletar/:id', 'AgendamentoController.deletar');
+Route.patch('atualizar/:id', 'AgendamentoController.atualizar');

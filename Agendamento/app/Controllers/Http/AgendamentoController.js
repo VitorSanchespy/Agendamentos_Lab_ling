@@ -6,9 +6,16 @@ class AgendamentoController{
         return response.json(agendamentos)
       }
       async novoAgendamento ({ request, response}) {
-        const data = request.only(['data_hora_inicio','data_hora_fim'])
-        const agendamento = await Agendamentos.create(data)
-        return response.status(201).json("Agendamento Criado Com Sucesso")
+        const data = request.only(["data_hora_inicio","data_hora_fim"]);
+        const agendamento = await Agendamentos.create({
+          data_hora_inicio: data.data_hora_inicio,
+          data_hora_fim: data.data_hora_fim
+        });
+        return response.status(201).json({
+          massage: "Agendamento Criado Com Sucesso",
+          data: agendamento
+        })
+        
       }
       async deletarAgendamento ({ params, response}) {
         const data = Agendamentos.find(params)

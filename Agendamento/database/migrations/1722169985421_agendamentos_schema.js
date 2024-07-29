@@ -8,7 +8,7 @@ class AgendamentosSchema extends Schema {
     this.create('agendamentos', (table) => {
       table.increments()
       table.timestamp('data_hora_inicio').notNullable()
-      table.timestamp('data_hora_final').notNullable()
+      table.timestamp('data_hora_fim').notNullable()
       table.timestamps()
     })
   }

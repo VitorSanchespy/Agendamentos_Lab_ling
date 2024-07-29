@@ -1,28 +1,20 @@
 'use strict'
-
-const Agendamento = use('App/Models/Agendamento')
-class AgendamentoController {
-    async index ({ request, response, view }) {
-        const agendamentos = await Agendamento.all()
+const Agendamentos = use('App/Models/Agendamento')
+class AgendamentoController{
+    async Agendamentos ({ request, response, view }) {
+        const agendamentos = await Agendamentos.all()
         return response.json(agendamentos)
       }
-    
-      async registro ({ request, response }) {
-        const data = request.only(['nome', 'email', 'data_hora_inicio', 'data_hora_fim'])
-        const agendamento = await Agendamento.create(data)
-        return response.status(201).json(agendamento)
+      async novoAgendamento ({ request, response}) {
+        const data = request.only(['data_hora_inicio','data_hora_fim'])
+        const agendamento = await Agendamentos.create(data)
+        return response.status(201).json("Agendamento Criado Com Sucesso")
       }
-      async deletar ({ params, response}){
-        const agendamento = await Agendamento.find(params.id);
-        await agendamento.delete()  
-        return response.status(201).json({ message: 'Agendamento deletado com sucesso' })
+      async deletarAgendamento ({ params, response}) {
+        const data = Agendamentos.find(params)
+        await Agendamentos.delete(data)
+        return response.status(201).json("Agendamento Deletado Com Sucesso")
       }
-      async atualizar ({ params, request, response}){
-        const agendamento = await Agendamento.find(params.id);
-        await agendamento.merge(request.only(['nome', 'email', 'data_hora_inicio', 'data_hora_fim'])) 
-        await agendamento.save();
-        return response.status(201).json({ message: 'Agendamento atualizado com sucesso' })
-      }
-}
 
+}
 module.exports = AgendamentoController
